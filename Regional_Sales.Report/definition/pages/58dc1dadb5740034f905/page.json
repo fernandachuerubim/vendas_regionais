@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "58dc1dadb5740034f905",
+  "displayName": "Win/Loss Ratio",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "pageBinding": {
+    "name": "d8c143d7dcee4ff8a173",
+    "type": "Default",
+    "parameters": []
+  }
+}

@@ -1,0 +1,239 @@
+table 'Opportunity Calendar'
+	lineageTag: cc1d9978-5493-4dc6-ae8c-fc574e2c8f1b
+
+	column Date
+		formatString: dd-mmm-yyyy
+		lineageTag: 8ba07d1b-ba58-4a27-8318-5521ede33955
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variação
+			isDefault
+			relationship: ecb0d3d7-8d68-4f43-8eda-b933568bf922
+			defaultHierarchy: LocalDateTable_6402d7c7-a07c-46c7-ab3f-8cdb14a964b5.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DAY
+		isHidden
+		formatString: dd-ddd
+		lineageTag: 5f8bc4a1-72c6-4f2b-8a1d-e131f836efce
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DAY]
+
+		variation Variação
+			isDefault
+			relationship: 19e74464-2f21-49b2-aaa5-497131ff901d
+			defaultHierarchy: LocalDateTable_45fe8edb-110b-4386-8dec-391957dae548.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DaySeq
+		formatString: 0
+		lineageTag: b04283d9-d897-43fa-962d-bf7820107970
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DaySeq]
+
+		annotation SummarizationSetBy = User
+
+	column YEAR
+		formatString: 0
+		lineageTag: 7e53db6f-8ed6-459e-956b-ac1e415cf393
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YEAR]
+
+		annotation SummarizationSetBy = User
+
+	column 'MONTH NUMBER'
+		formatString: 0
+		lineageTag: 7fc195ec-280b-4772-82d4-ba3a438da0c0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MONTH NUMBER]
+
+		annotation SummarizationSetBy = User
+
+	column MONTH
+		lineageTag: 76b8aacd-0961-421a-ad71-e785528b9d64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MONTH]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YEAR MONTH NUMBER'
+		formatString: 0
+		lineageTag: 772f49cb-2215-4bd5-a68a-d1443b34ade4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YEAR MONTH NUMBER]
+
+		annotation SummarizationSetBy = User
+
+	column 'YEAR MONTH'
+		dataType: dateTime
+		formatString: mmmm" de "yyyy
+		lineageTag: f8735d78-2452-4fe8-a280-7aeeb92ff848
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YEAR MONTH]
+
+		variation Variação
+			isDefault
+			relationship: b93a8699-48d9-44a1-956a-5196cdcdb67e
+			defaultHierarchy: LocalDateTable_fac16bc4-e252-4100-87a1-f49426b7b649.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'YEAR WEEK'
+		lineageTag: bf15a639-a7ea-4f4b-849d-51e45fcba65a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YEAR WEEK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEK
+		formatString: "Week of "ddd dd-mmm-yyyy
+		lineageTag: 61f1d462-e92d-4ba9-993e-e355c20d9780
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [WEEK]
+
+		variation Variação
+			isDefault
+			relationship: 59a800eb-ca03-4001-8df7-75f863d8f558
+			defaultHierarchy: LocalDateTable_6d6c699f-c76f-4728-9519-cf10751c9efe.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'RELATIVE MONTH'
+		formatString: 0
+		lineageTag: 201264d4-f6bf-4a74-a539-1bebe56b15b3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [RELATIVE MONTH]
+
+		annotation SummarizationSetBy = User
+
+	column 'RELATIVE WEEK'
+		lineageTag: d4339c3d-543c-44ae-8b58-815955fdeee9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [RELATIVE WEEK]
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'RELATIVE DAY'
+		formatString: dd-mmm-yyyy
+		lineageTag: 47a827df-57b3-40ee-9f8b-a79de46bd021
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [RELATIVE DAY]
+
+		variation Variação
+			isDefault
+			relationship: 596fccae-dcf9-45db-8a9f-c2283f760d50
+			defaultHierarchy: LocalDateTable_da6f9fbe-2799-4fc6-a165-f77bafef271a.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'RELATIVE 07 DAY PERIOD'
+		lineageTag: 8c8395a2-ee5b-4430-8fa8-34366b004d9c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [RELATIVE 07 DAY PERIOD]
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'RELATIVE 30 DAY PERIOD'
+		lineageTag: 36b59956-2609-4919-9139-f1ae7eee66ea
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [RELATIVE 30 DAY PERIOD]
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Opportunity Calendar' = calculated
+		mode: import
+		source = ```
+				
+				VAR StartDate =
+				    DATE ( YEAR ( MIN ( Opportunities[CloseDate] ) ), 1, 1 )
+				VAR EndDate =
+				    DATE ( YEAR (
+				        IF (
+				            ISBLANK ( MAX (  Opportunities[CloseDate] ) ),
+				            TODAY (),
+				            MAX (  Opportunities[CloseDate] )
+				        )
+				    ), 12, 31 )
+				VAR BASECALENDAR =
+				    CALENDAR ( StartDate, EndDate )
+				RETURN
+				    GENERATE (
+				        BASECALENDAR,
+				        VAR DateSequence = DATEDIFF ( StartDate, [DATE], DAY ) + 1
+				        VAR BASEDATE = [DATE]
+				        VAR YEARDATE = YEAR ( BASEDATE )
+				        VAR MONTHNUMBER = MONTH ( BASEDATE )
+				        VAR MONTHNAME = FORMAT ( BASEDATE, "MMMM" )
+				        VAR YEARMONTHNAME = FORMAT ( BASEDATE, "MMM YYYY" )
+				        VAR YEARMONTHNUMBER = YEARDATE * 12 + ( MONTHNUMBER - 1 )
+				        VAR YEARWEEK = YEARDATE & "-W" & RIGHT ( "0" & WEEKNUM ( BASEDATE ), 2 )
+				        VAR DayNumberOfWeek = WEEKDAY ( [Date] )
+				        VAR StartOfWeek = [Date] - ( 1 * DayNumberOfWeek )
+				        VAR StartOfRelativeWeek = [Date] - WEEKDAY ( [Date] ) + 1
+				        VAR StartOfCurrentWeek = TODAY () - WEEKDAY ( TODAY () ) + 1
+				        var RelativeMonth = DATEDIFF(TODAY(),[Date],MONTH)
+				        VAR RelativeWeek = ( StartOfRelativeWeek - StartOfCurrentWeek ) / 7
+				        var RelativeDay = BASEDATE - TODAY()
+				        var Relative7DayPeriod = ROUNDDOWN(([Date] - TODAY())/7,0) + IF([Date]<TODAY(),+1,+2)
+				        var Relative30DayPeriod = ROUNDDOWN(([Date] - TODAY())/30,0) + IF([Date]>TODAY(),1,0)   
+				
+				        RETURN
+				            ROW (
+				                "DAY", BASEDATE,
+				                "DaySeq", DateSequence,
+				                "YEAR", YEARDATE,
+				                "MONTH NUMBER", MONTHNUMBER,
+				                "MONTH", MONTHNAME,
+				                "YEAR MONTH NUMBER", YEARMONTHNUMBER,
+				                "YEAR MONTH", YEARMONTHNAME,
+				                "YEAR WEEK", YEARWEEK,
+				                "WEEK", StartOfWeek,
+				                "RELATIVE MONTH", RelativeMonth,
+				                "RELATIVE WEEK", RelativeWeek,
+				                "RELATIVE DAY", RelativeDay,
+				                "RELATIVE 07 DAY PERIOD", Relative7DayPeriod,
+				                "RELATIVE 30 DAY PERIOD", Relative30DayPeriod
+				                )
+				            )
+				```
+
+	annotation PBI_Id = c520985db08246bebc81272c6c6db08f
+

@@ -1,0 +1,50 @@
+table Owners
+	lineageTag: 6012cf6f-97d5-4c65-afce-b915ba066de6
+
+	column Owner
+		dataType: string
+		lineageTag: c0cb3cb5-b7d6-48ad-81b2-5ee83264b11e
+		summarizeBy: none
+		sourceColumn: Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column Manager
+		dataType: string
+		lineageTag: 38511eb7-fd54-4dad-8d5e-4c910ffa0fe0
+		summarizeBy: none
+		sourceColumn: Manager
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column SystemUserSeq
+		dataType: int64
+		formatString: 0
+		lineageTag: ddc11187-8080-484c-bfa8-0c6470f63864
+		summarizeBy: none
+		sourceColumn: SystemUserSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column systemuserid
+		dataType: string
+		lineageTag: be7783a2-6296-4a6e-b153-cd84ce20c47a
+		summarizeBy: none
+		sourceColumn: systemuserid
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Owners = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Projetos\regional_sales\dataset\Owners.csv"),[Delimiter=";", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Owner", type text}, {"Manager", type text}, {"SystemUserSeq", Int64.Type}, {"systemuserid", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

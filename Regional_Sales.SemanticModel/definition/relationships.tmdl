@@ -1,0 +1,55 @@
+relationship AutoDetected_9171887d-8557-4645-9351-cf6f4de9e32d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Contacts.AccountSeq
+	toColumn: Accounts.AccountSeq
+
+relationship AutoDetected_5119d19a-165b-4ed8-bb81-2bcadd2c5fa3
+	fromColumn: Accounts.IndustrySeq
+	toColumn: Industries.IndustrySeq
+
+relationship AutoDetected_c9d266b8-09ed-4c89-b1b7-2ee7162c878f
+	fromColumn: Opportunities.AccountSeq
+	toColumn: Accounts.AccountSeq
+
+relationship AutoDetected_c47e3fe2-14b8-4026-8569-edc42a02087b
+	fromColumn: Opportunities.SystemUserSeq
+	toColumn: Owners.SystemUserSeq
+
+relationship AutoDetected_27dd0388-c8a9-4fef-a01d-629fa6b9108f
+	fromColumn: Opportunities.ProductSeq
+	toColumn: Products.ProductSeq
+
+relationship AutoDetected_a5a83cf3-66ef-43cd-a279-b3a8438c3362
+	fromColumn: Accounts.'State or Province'
+	toColumn: Territories.'State Or Province'
+
+relationship ecb0d3d7-8d68-4f43-8eda-b933568bf922
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Opportunity Calendar'.Date
+	toColumn: LocalDateTable_6402d7c7-a07c-46c7-ab3f-8cdb14a964b5.Date
+
+relationship 19e74464-2f21-49b2-aaa5-497131ff901d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Opportunity Calendar'.DAY
+	toColumn: LocalDateTable_45fe8edb-110b-4386-8dec-391957dae548.Date
+
+relationship 59a800eb-ca03-4001-8df7-75f863d8f558
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Opportunity Calendar'.WEEK
+	toColumn: LocalDateTable_6d6c699f-c76f-4728-9519-cf10751c9efe.Date
+
+relationship 596fccae-dcf9-45db-8a9f-c2283f760d50
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Opportunity Calendar'.'RELATIVE DAY'
+	toColumn: LocalDateTable_da6f9fbe-2799-4fc6-a165-f77bafef271a.Date
+
+relationship f83bdf15-97f8-98e9-e98a-8a3bb9d92155
+	fromColumn: Opportunities.CloseDate
+	toColumn: 'Opportunity Calendar'.Date
+
+relationship b93a8699-48d9-44a1-956a-5196cdcdb67e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Opportunity Calendar'.'YEAR MONTH'
+	toColumn: LocalDateTable_fac16bc4-e252-4100-87a1-f49426b7b649.Date
+

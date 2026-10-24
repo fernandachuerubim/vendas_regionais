@@ -1,0 +1,40 @@
+table Campaigns
+	lineageTag: 09c452f4-5dee-4ba8-bd74-71d5093b5c04
+
+	column CampaignSeq
+		dataType: int64
+		formatString: 0
+		lineageTag: b9ec086f-4e78-4741-a89c-a6d4590a2b5e
+		summarizeBy: sum
+		sourceColumn: CampaignSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Campaign Type'
+		dataType: string
+		lineageTag: 08a8fe15-a381-421e-bd93-b8af4434883b
+		summarizeBy: none
+		sourceColumn: Campaign Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Campaign
+		dataType: string
+		lineageTag: a845e487-647b-4755-84da-6d3730255830
+		summarizeBy: none
+		sourceColumn: Campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Campaigns = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Projetos\regional_sales\dataset\Campaigns.csv"),[Delimiter=";", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"CampaignSeq", Int64.Type}, {"Campaign Type", type text}, {"Campaign", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,108 @@
+table Accounts
+	lineageTag: 26c3c629-96e4-49a5-a50e-aacfd3b7c81a
+
+	column 'Account Name'
+		dataType: string
+		lineageTag: 1d1b0259-6bea-48e3-930c-054ab222e419
+		summarizeBy: none
+		sourceColumn: Account Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State or Province'
+		dataType: string
+		lineageTag: b7a2ed01-7370-4133-976a-d7cb8f4a0f10
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State or Province
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 601fd763-6b99-4f72-83c1-0808f388cb37
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountID
+		dataType: string
+		lineageTag: f4b3e596-d520-4ac1-b7ad-43f125bd178b
+		summarizeBy: none
+		sourceColumn: AccountID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountSeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dc9bc73-3270-451d-9900-b9bd69edb93a
+		summarizeBy: none
+		sourceColumn: AccountSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column IndustrySeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 063495ba-0719-4bc9-bde8-e49cdcddfc5e
+		summarizeBy: none
+		sourceColumn: IndustrySeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountOwnerSeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 721f39c3-0a32-41be-99a7-91bd97605f65
+		summarizeBy: sum
+		sourceColumn: AccountOwnerSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Number'
+		dataType: string
+		lineageTag: 1384e409-ece1-4eaa-a9fd-06c7967111e2
+		summarizeBy: none
+		sourceColumn: Account Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritorySeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fb47616-1b0a-4d39-8c1e-52e7b970bdb9
+		summarizeBy: sum
+		sourceColumn: TerritorySeq
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'State or Province Hierarquia'
+		lineageTag: be62cefc-b160-4e08-b8ba-0098e17e8203
+
+		level 'State or Province'
+			lineageTag: de38dd01-d0fa-417f-a072-1c9e9108d0be
+			column: 'State or Province'
+
+		level 'Account Name'
+			lineageTag: 9638d7b9-b5d5-4b75-b950-68350e0c20ea
+			column: 'Account Name'
+
+		level Country
+			lineageTag: 7df979e3-b596-41fd-8818-aca99db84e84
+			column: Country
+
+	partition Accounts = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Projetos\regional_sales\dataset\Accounts.csv"),[Delimiter=";", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Account Name", type text}, {"State or Province", type text}, {"Country", type text}, {"AccountID", type text}, {"AccountSeq", Int64.Type}, {"IndustrySeq", Int64.Type}, {"AccountOwnerSeq", Int64.Type}, {"Account Number", type text}, {"TerritorySeq", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

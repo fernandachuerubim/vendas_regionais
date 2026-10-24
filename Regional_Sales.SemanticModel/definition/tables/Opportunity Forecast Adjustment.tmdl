@@ -1,0 +1,24 @@
+table 'Opportunity Forecast Adjustment'
+	lineageTag: fceac09c-66fb-4158-a4e6-4a97f501cc6a
+
+	column Blank = 1
+		formatString: 0
+		lineageTag: a64c3a36-2ca1-47bc-93d2-3ebd11b2326e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forecast Adjustment'
+		formatString: 0
+		lineageTag: 254b32d6-fba5-431c-85ba-01cb8228e766
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = User
+
+	partition 'Opportunity Forecast Adjustment' = calculated
+		mode: import
+		source = GENERATESERIES(-80, 20, 10)
+
+	annotation PBI_Id = 9fae70d2c73b4c249313698f49d6d75d
+

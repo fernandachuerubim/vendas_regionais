@@ -1,0 +1,35 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Accounts","Campaigns","Contacts","Industries","Opportunities","Owners","Products","Territories"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Accounts
+ref table Campaigns
+ref table Contacts
+ref table Industries
+ref table Opportunities
+ref table Owners
+ref table Products
+ref table Territories
+ref table Calculations
+ref table 'Opportunity Forecast Adjustment'
+ref table 'Opportunity Calendar'
+ref table DateTableTemplate_bee74471-7c2b-4dcd-b9ef-da9629321895
+ref table LocalDateTable_6402d7c7-a07c-46c7-ab3f-8cdb14a964b5
+ref table LocalDateTable_45fe8edb-110b-4386-8dec-391957dae548
+ref table LocalDateTable_6d6c699f-c76f-4728-9519-cf10751c9efe
+ref table LocalDateTable_da6f9fbe-2799-4fc6-a165-f77bafef271a
+ref table LocalDateTable_fac16bc4-e252-4100-87a1-f49426b7b649
+
+ref cultureInfo pt-BR
+

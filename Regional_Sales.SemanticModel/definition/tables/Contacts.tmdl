@@ -1,0 +1,49 @@
+table Contacts
+	lineageTag: ae8dfd00-1c02-4ec8-a351-4db63c4ced10
+
+	column Contact
+		dataType: string
+		lineageTag: 11054f5a-51e4-47ad-99e9-6a7823decd03
+		summarizeBy: none
+		sourceColumn: Contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Title'
+		dataType: string
+		lineageTag: c2822137-fa09-4f4f-bbf2-358a5f16fba2
+		summarizeBy: none
+		sourceColumn: Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column ContactSeq
+		dataType: int64
+		formatString: 0
+		lineageTag: b5a39524-84f5-43b4-9911-62ff43fcc410
+		summarizeBy: sum
+		sourceColumn: ContactSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountSeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 31addb44-6311-47a8-92d7-175d627eb231
+		summarizeBy: none
+		sourceColumn: AccountSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Contacts = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Projetos\regional_sales\dataset\Contacts.csv"),[Delimiter=";", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Contact", type text}, {"Job Title", type text}, {"ContactSeq", Int64.Type}, {"AccountSeq", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

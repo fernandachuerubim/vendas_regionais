@@ -1,0 +1,58 @@
+table Territories
+	lineageTag: 97dcff6c-254e-4ca4-8cd8-4689fbf719cf
+
+	column Region
+		dataType: string
+		lineageTag: 1af6db40-f204-4ca8-87ec-09687cb06825
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Territory
+		dataType: string
+		lineageTag: 94b63ea3-b336-48c2-961c-5ed80d6d1c00
+		summarizeBy: none
+		sourceColumn: Territory
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: bd434c2d-dc49-4949-b3ec-36cd6e2221b7
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritorySeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 229989f9-0544-40e2-8c88-b2eca844fef9
+		summarizeBy: none
+		sourceColumn: TerritorySeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Or Province'
+		dataType: string
+		lineageTag: 15d2a943-f5b3-4936-a23b-95449e3a1f05
+		summarizeBy: none
+		sourceColumn: State Or Province
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Territories = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Projetos\regional_sales\dataset\Territories.csv"),[Delimiter=";", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Region", type text}, {"Territory", type text}, {"Country", type text}, {"TerritorySeq", Int64.Type}, {"State Or Province", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

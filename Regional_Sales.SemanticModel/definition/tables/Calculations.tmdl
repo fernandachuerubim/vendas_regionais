@@ -1,0 +1,133 @@
+table Calculations
+	lineageTag: 0a2cab1a-294e-425e-be07-1e4cf11d19b9
+
+	measure 'Revenue Won' =
+			
+			CALCULATE(
+			    SUMX(Opportunities, Opportunities[Value]),
+			    FILTER(Opportunities, Opportunities[Status] = "Won")
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2d94ecc3-a2f0-484b-95a1-76ce4bea9b5c
+
+	measure 'Forecast Adjustment Value' = SELECTEDVALUE('Opportunity Forecast Adjustment'[Forecast Adjustment], 0)
+		formatString: 0
+		lineageTag: c4891fda-9222-4efc-a78d-1c2ce349cea2
+
+	measure 'Revenue In Pipeline' =
+			
+			VAR Revenue =
+			    CALCULATE (
+			        SUMX ( Opportunities, Opportunities[Value] ),
+			        FILTER (
+			            Opportunities,
+			            Opportunities[Status] = "Open"
+			            && VALUE(LEFT(Opportunities[Sales Stage],1)) >=2
+			        )
+			    )
+			RETURN
+			    Revenue + ( Revenue * ( [Forecast Adjustment Value] / 100 ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 697ba29f-c212-4e66-aee7-7dd058d564ec
+
+	measure 'Rev Goal' = ```
+			
+			VAR RevenueInPipeline =
+			    CALCULATE (
+			        SUMX ( Opportunities, Opportunities[Value] ),
+			        FILTER (
+			            Opportunities,
+			            Opportunities[Status] = "Open"
+			            && VALUE(LEFT(Opportunities[Sales Stage],1)) >=2
+			        )
+			    )
+			VAR BaseGoal =  
+			MROUND(([Revenue Won]+ (RevenueInPipeline*.60)),1000000)    
+			RETURN
+			IF(BaseGoal > 0, BaseGoal, MROUND(([Revenue Won]+ (RevenueInPipeline*.60)),100000))
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 891d5cfa-befc-49d4-af03-b9919a6a0527
+
+	measure 'Forecast %' = (([Revenue Won]+[Revenue In Pipeline]))/ [Rev Goal]
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: 325d0552-64b1-455c-87c5-3cb953a3e657
+
+	measure 'Revenue Open' =
+			
+			VAR Revenue =
+			    CALCULATE (
+			        SUMX ( Opportunities, Opportunities[Value] ),
+			        FILTER (
+			            Opportunities,
+			            Opportunities[Status] = "Open"
+			        )
+			    )
+			RETURN
+			    Revenue + ( Revenue * ( [Forecast Adjustment Value] / 100 ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 9eefd795-1690-41fa-96cf-640354555e2c
+
+	measure 'Forecast by Win/Loss Ratio' = [Revenue Open] * [Close %]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 061c93b5-39f7-4db4-99c8-52dcb666127b
+
+	measure 'Close %' = [Count of Won]/([Count of Won]+[Count of Lost])
+		formatString: #,0%;-#,0%;#,0%
+		lineageTag: 466e69c5-f67b-4c75-8da6-30d878c8e472
+
+	measure 'Count of Lost' = ```
+			
+			COUNTAX(
+			    FILTER(
+			        KEEPFILTERS(Opportunities),Opportunities[Status] = "Lost"
+			        ),
+			    Opportunities[OpportunitySeq]
+			    ) 
+			```
+		formatString: 0
+		lineageTag: 5ddb2ce7-32b5-4f4b-9da3-e539cc3537f1
+
+	measure 'Count of Won' = ```
+			
+			COUNTAX(
+			    FILTER(
+			        KEEPFILTERS(Opportunities),Opportunities[Status] = "Won"
+			        ),
+			    Opportunities[OpportunitySeq]
+			    ) 
+			```
+		formatString: 0
+		lineageTag: ef5941c8-6800-477c-8275-8f450b91dfff
+
+	measure Forecast = ([Revenue Won]+[Revenue In Pipeline])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 1a10d721-b67b-4e8a-a9ab-09d56e4e2ca6
+
+	measure 'Opportunity Count' =
+			
+			COUNTAX(Opportunities,TRUE())
+		formatString: 0
+		lineageTag: 27076af9-fa2e-48c4-9381-1a87207d7ed6
+
+	measure 'Revenue Won Average Deal Size' = AVERAGEX(Opportunities,[Revenue Won])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 9587b9a8-8cd4-4017-80c3-cfdafdedd1a5
+
+	column Column
+		formatString: 0
+		lineageTag: 9f716c86-49d6-4bc1-8f0f-f7e87b3bb236
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calculations = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = d522fcc1606641d7830ffb34c28c7660
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

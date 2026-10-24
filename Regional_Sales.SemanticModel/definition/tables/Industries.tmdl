@@ -1,0 +1,32 @@
+table Industries
+	lineageTag: fd15f5f0-87b5-458b-8270-20245fa5e07e
+
+	column Industry
+		dataType: string
+		lineageTag: b4675963-da4a-4a1a-b50a-5a747a5390e6
+		summarizeBy: none
+		sourceColumn: Industry
+
+		annotation SummarizationSetBy = Automatic
+
+	column IndustrySeq
+		dataType: int64
+		formatString: 0
+		lineageTag: 7cf7f685-587a-4798-896a-1df5e5edfb43
+		summarizeBy: none
+		sourceColumn: IndustrySeq
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Industries = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Projetos\regional_sales\dataset\Industries.csv"),[Delimiter=";", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Industry", type text}, {"IndustrySeq", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
