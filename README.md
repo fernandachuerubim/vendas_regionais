@@ -6,6 +6,10 @@ Este projeto tem como objetivo a análise de vendas regionais, desenvolvido no M
 
 O uso do formato PBIP permite versionar todo o projeto (relatório, modelo semântico e configurações) diretamente com Git, facilitando o acompanhamento de alterações e o trabalho colaborativo.
 
+## Dashboard do Projeto Power BI
+
+https://gist.github.com/user-attachments/assets/e866fcdc-66d6-4500-a8c9-5adb4a07b168
+
 ## Estrutura do projeto
 
 ```plaintext
